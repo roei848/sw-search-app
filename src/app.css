@@ -1,0 +1,21 @@
+.search-bar-wrapper {
+  margin: 0 12px;
+
+  .search-bar-input {
+    height: 36px;
+    background-color: white;
+    border-radius: 16px;
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+
+    .search-icon {
+      cursor: pointer;
+    }
+
+    fieldset {
+      border: 0;
+    }
+  }
+}
