@@ -1,3 +1,7 @@
+.search-page-title {
+  margin-left: 16px;
+}
+
 .search-bar-wrapper {
   margin: 0 12px;
 
@@ -18,4 +22,100 @@
       border: 0;
     }
   }
+}
+
+.view-all-option {
+  color: blue;
+  text-decoration: underline;
+  margin-left: 24px;
+  cursor: pointer;
+}
+
+
+.search-results-page-wrapper {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-title {
+  font-size: 24px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.results-table th,
+.results-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.results-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+}
+
+.results-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.results-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.results-table td[colspan="6"] {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+.actions-column {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.action-icon {
+  cursor: pointer;
+}
+
+.action-icon:hover {
+  color: dodgerblue;
+}
+
+.add-new-button {
+  background-color: dodgerblue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 8px;
+  margin-top: 20px;
+  border-radius: 6px;
+  font-size: 18px;
+  align-self: flex-end;
+
+}
+
+#cancel.cancel-button {
+  margin-right: 2%;
+  font-weight: bold;
+  color: black;
+}
+
+#create.create-button {
+  background-color: dodgerblue;
+  color: white;
+  font-weight: bold
 }

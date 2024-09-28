@@ -1,0 +1,24 @@
+.loader_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.text {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: black;
+}
