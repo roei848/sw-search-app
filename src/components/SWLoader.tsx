@@ -1,5 +1,5 @@
 import React from 'react';
-import './swloader.css'; // Assuming you have the CSS in Loader.css
+import './swloader.css';
 
 
 const SWLoader = () => {
@@ -9,7 +9,6 @@ const SWLoader = () => {
           viewBox="-50 -50 700 700"
           className="loader"
           xmlns="http://www.w3.org/2000/svg"
-          xmlnsSvg="http://www.w3.org/2000/svg"
       >
         <g>
           <title>Layer 1</title>
