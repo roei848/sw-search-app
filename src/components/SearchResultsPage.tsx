@@ -3,48 +3,64 @@ import axios from "axios";
 import SWLoader from "./SWLoader";
 import PersonDialog from "./PersonDialog";
 import {swapi_base_url} from "../utils/globals";
+import {DialogMode, Person} from "../utils/interfaces";
 import {AddOutlined, DeleteOutlined, EditOutlined} from "@mui/icons-material";
 import '../app.css';
 
 
 const SearchResultsPage = () => {
-    const [people, setPeople] = useState([]);
-    const [selectedPerson, setSelectedPerson] = useState(null);
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogMode, setDialogMode] = useState('');
+    const [people, setPeople] = useState<Person[]>([]);
+    const [selectedPerson, setSelectedPerson] = useState<Person>({
+        name: '',
+        height: '',
+        mass: '',
+        hair_color: '',
+        eye_color: '',
+        birth_year: '',
+    });
+    const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+    const [dialogMode, setDialogMode] = useState<DialogMode>();
     const category = new URLSearchParams(window.location.search).get('category');
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         if (category === 'people') {
-            axios.get(`${swapi_base_url}/people`).then(res => {
-                setPeople(res.data.results);
-                setIsLoading(false);
-            }).catch(err => console.log(err));
+            axios.get(`${swapi_base_url}/people`)
+                .then(res => {
+                    setPeople(res.data.results);
+                    setIsLoading(false);
+                })
+                .catch(err => console.log(err));
         }
     }, [category]);
 
-    const handleDelete = (name) => {
+    const handleDelete = (name: string): void => {
         setPeople((prevPeople) => prevPeople.filter((person) => person.name !== name));
     };
 
-    const handleEdit = (person) => {
+    const handleEdit = (person: Person): void => {
         setSelectedPerson(person);
         setDialogMode('edit');
         setDialogOpen(true);
     };
 
-    const handleCreate = () => {
-        setSelectedPerson(null);
+    const handleCreate = (): void => {
+        setSelectedPerson({
+            name: '',
+            height: '',
+            mass: '',
+            hair_color: '',
+            eye_color: '',
+            birth_year: '',
+        });
         setDialogMode('create');
         setDialogOpen(true);
     };
 
-    const handleSave = (updatedPerson, dialogMode) => {
-        console.log(updatedPerson, dialogMode);
+    const handleSave = (updatedPerson: Person, dialogMode: DialogMode | undefined): void => {
         if (dialogMode === 'edit') {
             setPeople((prevPeople) =>
-                prevPeople.map((person) => (person.name === selectedPerson.name ? updatedPerson : person))
+                prevPeople.map((person) => (person.name === selectedPerson?.name ? updatedPerson : person))
             );
         } else {
             setPeople([...people, updatedPerson]);
@@ -55,7 +71,7 @@ const SearchResultsPage = () => {
         <div className="search-results-page-wrapper">
             <h1 className="results-title">{category?.toUpperCase()}</h1>
             {category === 'people' ? isLoading ? (
-                <SWLoader />
+                <SWLoader/>
             ) : (
                 <>
                     {people.length > 0 ? (
@@ -96,7 +112,7 @@ const SearchResultsPage = () => {
                                 </tbody>
                             </table>
                             <div className="add-new-button" onClick={handleCreate}>
-                                <AddOutlined />
+                                <AddOutlined/>
                                 <span>Add New</span>
                             </div>
                         </>
@@ -117,6 +133,5 @@ const SearchResultsPage = () => {
         </div>
     );
 };
-
 
 export default SearchResultsPage;

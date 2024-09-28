@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import {Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button} from '@mui/material';
-import "../app.css"
+import React, { useState, ChangeEvent } from 'react';
+import {DialogMode, Person} from "../utils/interfaces";
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
+import "../app.css";
 
-const PersonDialog = ({ open, onClose, onSave, initialPerson, dialogMode }) => {
-    const [person, setPerson] = useState(initialPerson);
 
-    useEffect(() => {
-        setPerson(initialPerson);
-    }, [initialPerson]);
+interface PersonDialogProps {
+    open: boolean;
+    onClose: () => void;
+    onSave: (person: Person, dialogMode: DialogMode | undefined) => void;
+    initialPerson: Person;
+    dialogMode: DialogMode | undefined;
+}
 
-    const handleChange = (e) => {
+const PersonDialog = ({ open, onClose, onSave, initialPerson, dialogMode }: PersonDialogProps) => {
+    const [person, setPerson] = useState<Person>(initialPerson);
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setPerson((prevPerson) => ({
-            ...prevPerson,
-            [name]: value,
-        }));
+        setPerson((prevPerson) => ({ ...prevPerson, [name]: value }));
     };
 
     const handleSave = () => {
         onSave(person, dialogMode);
         onClose();
     };
-
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -80,7 +82,7 @@ const PersonDialog = ({ open, onClose, onSave, initialPerson, dialogMode }) => {
                 <Button variant="text" onClick={onClose} color="inherit">
                     Cancel
                 </Button>
-                <Button variant="contained" onClick={() => handleSave(person, dialogMode)}>
+                <Button variant="contained" onClick={handleSave}>
                     Save
                 </Button>
             </DialogActions>
